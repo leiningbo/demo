@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +21,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class Swagger2 {
 
+    @Value("${system.swagger.host}")
+    private String host;
+
+    /**
+     * 生成环境下记得设置为false
+     */
+    @Value("${system.swagger.enable}")
+    private Boolean enable;
+
     @Bean
     public Docket ceateRestApi(){
         return new Docket(DocumentationType.SWAGGER_2)
+                .enable(enable)
+                .host(host)
                 .apiInfo(apiInfo())
                 .select()
                 //暴露接口地址的包路径

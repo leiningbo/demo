@@ -3,3 +3,8 @@ server:
   tomcat:
     uri-encoding: UTF-8
 
+system:
+  swagger:
+    enable: true
+    host: localhost:${server.port}
+
