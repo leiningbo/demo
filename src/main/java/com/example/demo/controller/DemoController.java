@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     @ApiOperation(value = "测试：abo",notes = "你好世界")
-//    @ApiImplicitParams({@ApiImplicitParam(paramType="header",name="token",dataType="String",value="令牌",required = true,defaultValue="")})
+    @ApiImplicitParams({@ApiImplicitParam(paramType="header",name="token",dataType="String",value="令牌",required = true,defaultValue="")})
     @RequestMapping(value = "/helloWorld",method = RequestMethod.GET)
-    public String helloWorld() {
-        return "hello world";
+    public String helloWorld(@ApiParam(name = "name",value = "收货人") @RequestParam(required = false) String name,
+                             @ApiParam(name = "addressId",value = "收货地址id") @RequestParam(required = false) Integer addressId) {
+        return "hello world"+name+"---"+addressId;
     }
 
 }
