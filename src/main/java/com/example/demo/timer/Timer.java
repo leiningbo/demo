@@ -1,5 +1,7 @@
 package com.example.demo.timer;
 
+import com.example.demo.service.impl.PaySourceTypeEnum;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -14,18 +16,23 @@ import java.util.List;
 @Component
 public class Timer {
 
+
     /**
-     * 每1分钟
+     * 每10秒
      */
-    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "*/10 * * * * ?")
     public void list(){
         List<Object> list = new ArrayList<>();
         list.add("哈哈");
         list.add("呵呵");
         list.add("嘿嘿");
         list.add("霍霍");
+        list.add(PaySourceTypeEnum.ALIPAY.getDesc());
+        list.add(PaySourceTypeEnum.WECHAT.getCode());
+        list.add(PaySourceTypeEnum.UNIONPAY.getDesc());
         System.out.println(list);
     }
+
 
 
 }
