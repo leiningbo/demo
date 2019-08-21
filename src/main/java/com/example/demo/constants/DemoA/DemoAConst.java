@@ -1,5 +1,7 @@
 package com.example.demo.constants.DemoA;
 
+import com.example.demo.service.impl.PaySourceTypeEnum;
+
 /**
  * 订单类型和送货方式枚举
  */
@@ -27,6 +29,20 @@ public class DemoAConst {
         aConst(Integer code, String value) {
             this.code = code;
             this.value = value;
+        }
+
+        /**
+         * 根据code 获取 value 值
+         * @param code
+         * @return
+         */
+        public static aConst getByCode(Integer code) {
+            for (aConst value : aConst.values()) {
+                if (value.getCode().equals(code)) {
+                    return value;
+                }
+            }
+            return null;
         }
     }
 
