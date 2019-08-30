@@ -15,6 +15,7 @@ import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.util.Factory;
 import org.assertj.core.util.Lists;
 import org.json.JSONArray;
@@ -22,7 +23,9 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import springfox.documentation.spring.web.json.Json;
 
@@ -220,6 +223,23 @@ public class DemoApplicationTests {
         //集合排序
         Collections.sort(students, Comparator.comparing(Student::getAge));
         students.forEach(System.out::println);
+    }
+
+    @Test
+    public void test() {
+        List<Object> list = new ArrayList<>();
+        if (CollectionUtils.isEmpty(list)) {
+            System.out.println("hah");
+        } else {
+            System.out.println("heh");
+        }
+
+        String abc = "abc";
+        if (StringUtils.isEmpty(abc)) {
+            System.out.println("无");
+        } else {
+            System.out.println("abc");
+        }
     }
 
 
