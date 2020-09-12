@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,13 +27,19 @@ import java.util.Map;
 public class TestEntityListener extends AnalysisEventListener<TestEntity> {
 
     /**
+     * 自定义用于暂时存储data
+     * 可以通过实例获取该值
+     */
+    private List<TestEntity> data = new ArrayList<>();
+
+    /**
      * 每读一行内容，都会调用一次 invoke ，在invoke可以操作读取到的数据
      * @param testEntity  每次读取到的数据封装的对象
      * @param analysisContext
      */
     @Override
     public void invoke(TestEntity testEntity, AnalysisContext analysisContext) {
-
+        data.add(testEntity);
         System.out.println("TestEntity:"+ JSON.toJSONString(testEntity));
 
     }
@@ -71,5 +79,14 @@ public class TestEntityListener extends AnalysisEventListener<TestEntity> {
             ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException)exception;
             log.error("第{}行，第{}列解析异常", excelDataConvertException.getRowIndex(), excelDataConvertException.getColumnIndex());
         }
+    }
+
+    /**
+     * 返回数据
+     *
+     * @return 返回读取的数据集合
+     **/
+    public List<TestEntity> getData() {
+        return data;
     }
 }
