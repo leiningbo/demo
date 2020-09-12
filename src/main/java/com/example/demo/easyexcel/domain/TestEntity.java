@@ -36,4 +36,15 @@ public class TestEntity {
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 //    private Date createTime;
 
+    /**
+     * 这里用string 去接日期才能格式化
+     */
+//    @DateTimeFormat("yyyy年MM月dd日 HH时mm分ss秒")
+//    private String date;
+    /**
+     * 我想接收百分比的数字
+     */
+//    @NumberFormat("#.##%")
+//    private String doubleData;
+
 }
