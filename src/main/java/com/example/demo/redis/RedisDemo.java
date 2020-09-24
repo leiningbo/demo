@@ -23,9 +23,13 @@ public class RedisDemo {
         stringRedisTemplate.opsForValue().set("age","1");
         stringRedisTemplate.opsForValue().get("name");
         //原子增
-        stringRedisTemplate.opsForValue().increment("age", 1);
+        stringRedisTemplate.opsForValue().increment("stock");
+        //点赞 +1
+        stringRedisTemplate.opsForValue().increment("like"+"uid");
         //原子减
-        stringRedisTemplate.opsForValue().decrement("age", 1);
+        stringRedisTemplate.opsForValue().decrement("stock");
+        //取消点赞 点赞 -1
+        stringRedisTemplate.opsForValue().decrement("like"+"uid");
 
         //hash
         stringRedisTemplate.opsForHash().put("key","fild","value");

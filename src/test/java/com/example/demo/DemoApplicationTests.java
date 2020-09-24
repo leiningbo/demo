@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo.constants.DemoA.DemoAConst;
 import com.example.demo.entity.Stationery;
 import com.example.demo.entity.Student;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,17 +17,16 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.util.Factory;
 import org.assertj.core.util.Lists;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import springfox.documentation.spring.web.json.Json;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -199,7 +197,7 @@ public class DemoApplicationTests {
         System.out.println(JSON.toJSON(map));
 
         // list转Map分组
-        Map<String, List<Student>> map2 = students.stream().filter(Objects::nonNull).collect(Collectors.groupingBy(stu ->(stu.getSex())));
+        Map<String, List<Student>> map2 = students.stream().filter(Objects::nonNull).collect(Collectors.groupingBy(stu -> (stu.getSex())));
         System.out.println(JSON.toJSON(map2));
 
         /**
@@ -213,7 +211,7 @@ public class DemoApplicationTests {
 
 
         //limit+skip类似mysql的limit关键字用法
-        List<String> names33=students.stream()
+        List<String> names33 = students.stream()
                 .filter(Objects::nonNull)
                 .map(Student::getName)
                 .skip(2)
@@ -241,6 +239,40 @@ public class DemoApplicationTests {
             System.out.println("abc");
         }
     }
+
+    @Test
+    public void test1() {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "1");
+        map.put("2", "2");
+        map.put("3", "3");
+        map.put("4", "4");
+        map.forEach((key,value)->{
+            if (StringUtils.equals("1", key)) {
+                System.out.println("key:"+key+",value:"+value);
+            }
+        });
+        for(Map.Entry<String, String> m :map.entrySet()){
+            System.out.println("key:"+m.getKey()+",value:"+m.getValue());
+        }
+    }
+
+    @Test
+    public void test2() {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(now);
+        LocalTime now1 = LocalTime.now();
+        System.out.println(now1);
+
+        Instant now2 = Instant.now();
+        System.out.println(now2);
+        String time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
+        System.out.println(time);
+
+    }
+
+
 
 
 }
