@@ -20,7 +20,7 @@ public class Timer {
     /**
      * 每10秒
      */
-    @Scheduled(cron = "*/10 * * * * ?")
+//    @Scheduled(cron = "*/10 * * * * ?")
     public void list(){
         List<Object> list = new ArrayList<>();
         list.add("哈哈");
