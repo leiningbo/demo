@@ -13,7 +13,7 @@ spring:
 
 mybatis:
   type-aliases-package: com.example.demo.entity
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:com.example.demo.mapper/*.xml
 
 system:
   swagger:
