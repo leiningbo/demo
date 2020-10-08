@@ -20,10 +20,17 @@ public class AsyncController {
     @Autowired
     private IAsyncService iAsyncService;
 
+    @RequestMapping(value = "/addScore1",method = RequestMethod.POST)
+    public String createUser1() {
+        log.info("--------------注册用户1--------------------");
+        iAsyncService.addScore1();
+        return "OK";
+    }
+
     @RequestMapping(value = "/addScore2",method = RequestMethod.POST)
     public String createUser2() {
         log.info("--------------注册用户2--------------------");
-        iAsyncService.addScore();
+        iAsyncService.addScore2();
         return "OK";
     }
 
