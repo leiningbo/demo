@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -8,11 +9,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * @program: demo
- * @description: 异步
  * @author: leiningbo
- * @create: 2020-10-08 15:09
- **/
+ * @description:  开启异步
+ * @date: Create in 13:01 2020/9/27
+ */
 @Configuration
 @EnableAsync
 public class AsyncConfiguration {
@@ -42,6 +42,5 @@ public class AsyncConfiguration {
         taskExecutor.initialize();
         return taskExecutor;
     }
-
 
 }
