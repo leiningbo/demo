@@ -6,10 +6,41 @@ server:
 spring:
   datasource:
     druid:
+      # 配置多数据源  abo数据库
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://139.196.32.68:3306/trade?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
       password: ningbo.com
+      #初始化连接大小:连接池建立时创建的初始化连接数
+      initial-size: 5
+      #最小空闲连接数:连接池中最小的活跃连接数
+      min-idle: 15
+      #最大连接数:连接池中最大的活跃连接数
+      max-active: 60
+      validation-query: 1
+      #获取连接时检测：是否在获得连接后检测其可用性
+      test-on-borrow: true
+      #空闲时检测：是否在连接空闲一段时间后检测其可用性
+      test-while-idle: true
+      #连接保持空闲而不被驱逐的最长时间
+      time-between-eviction-runs-millis: 60000
+      # 合并多个数据监控
+      use-global-data-source-stat: true
+      #配置druid显示监控统计信息
+      #开启Druid的监控平台 http://localhost:port/druid
+      #1. StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: abo
+        reset-enable: false
+        url-pattern: /druid/*
+      #2。WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+
+
   mail:
     # QQ邮箱发送邮件服务器
     host: smtp.qq.com
