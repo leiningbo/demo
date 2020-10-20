@@ -28,6 +28,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
@@ -258,6 +260,36 @@ public class DemoApplicationTests {
         }
     }
 
+    /**
+     * 自定义捆包号
+     * @return KB
+     */
+    public static String generateBundleNo(String lastBundle) {
+        StringBuilder result = new StringBuilder();
+        result.append("KB");
+        String date = DateTimeFormatter.ofPattern("yyyyMMddHHmm").format(LocalDateTime.now());
+        result.append(date);
+        if (!StringUtils.isEmpty(lastBundle)) {
+            Pattern pattern = Pattern.compile("" + "(\\d{12})(\\d{4})$");
+            Matcher matcher = pattern.matcher(lastBundle);
+            String lastFlowNoNum = "";
+            String lastFlowNoDate = "";
+            if (matcher.find()) {
+                lastFlowNoDate = matcher.group(1);
+                lastFlowNoNum = matcher.group(2);
+            }
+            if (lastFlowNoDate.equals(date)) {
+                Integer curFlowNoNumDig = Integer.parseInt(lastFlowNoNum) + 1;
+                result.append(String.format("%0" + 4 + "d", curFlowNoNumDig));
+            } else {
+                result.append(String.format("%0" + 4 + "d", 1));
+            }
+        } else {
+            result.append(String.format("%0" + 4 + "d", 1));
+        }
+        return result.toString();
+    }
+
     @Test
     public void test2() {
         LocalDateTime now = LocalDateTime.now();
@@ -269,9 +301,14 @@ public class DemoApplicationTests {
         System.out.println(now2);
         String time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
         System.out.println(time);
-
+        System.out.println(String.format("%0" + 4 + "d", 1));
     }
 
+    @Test
+    public void test3(){
+        String bundleNo = generateBundleNo("");
+        System.out.println(bundleNo);
+    }
 
 
 
