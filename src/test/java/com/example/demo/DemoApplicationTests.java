@@ -267,8 +267,10 @@ public class DemoApplicationTests {
     public static String generateBundleNo(String lastBundle) {
         StringBuilder result = new StringBuilder();
         result.append("KB");
-        String date = DateTimeFormatter.ofPattern("yyyyMMddHHmm").format(LocalDateTime.now());
+        String date = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now());
         result.append(date);
+        String time = System.currentTimeMillis()+"";
+        result.append(time.substring(time.length() - 4));
         if (!StringUtils.isEmpty(lastBundle)) {
             Pattern pattern = Pattern.compile("" + "(\\d{12})(\\d{4})$");
             Matcher matcher = pattern.matcher(lastBundle);
@@ -285,7 +287,7 @@ public class DemoApplicationTests {
                 result.append(String.format("%0" + 4 + "d", 1));
             }
         } else {
-            result.append(String.format("%0" + 4 + "d", 1));
+            result.toString();
         }
         return result.toString();
     }
@@ -296,18 +298,24 @@ public class DemoApplicationTests {
         System.out.println(now);
         LocalTime now1 = LocalTime.now();
         System.out.println(now1);
-
+        String l = System.currentTimeMillis()+"";
+        System.out.println(l);
+        System.out.println(l.substring(l.length()-4));
         Instant now2 = Instant.now();
         System.out.println(now2);
         String time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
         System.out.println(time);
+        String time2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now());
+        System.out.println(time2);
         System.out.println(String.format("%0" + 4 + "d", 1));
     }
 
     @Test
     public void test3(){
-        String bundleNo = generateBundleNo("");
-        System.out.println(bundleNo);
+        for (int i = 0; i < 100; i++) {
+            String bundleNo = generateBundleNo("")+i;
+            System.out.println(bundleNo);
+        }
     }
 
 
