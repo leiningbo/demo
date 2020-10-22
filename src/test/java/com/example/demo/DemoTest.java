@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demo.entity.Person;
 import com.example.demo.entity.TradeGoods;
 import com.example.demo.service.ITradeGoodsService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -57,12 +60,50 @@ public class DemoTest {
     }
 
     @Test
-    public void tradeGoodsTest() {
+    public void tradeGoodsTest() throws Exception {
         List<TradeGoods> tradeGoods = iTradeGoodsService.queryAll();
         for (TradeGoods tradeGood : tradeGoods) {
+            // 反射拿对象的属性字段名、值、数据类型
+            Field[] declaredFields = tradeGood.getClass().getDeclaredFields();
+            for (Field declaredField : declaredFields) {
+                declaredField.setAccessible(true);
+                System.out.println(declaredField.getName());
+                System.out.println(declaredField.get(tradeGood));
+                System.out.println(declaredField.getType().toString());
+            }
+
             System.out.println("tradeGoods:"+ JSON.toJSONString(tradeGood));
         }
     }
+
+    @Test
+    public void test10() throws Exception {
+        Person person = new Person();
+        person.setId(1L);
+        person.setName("AAA");
+        Person person2 = new Person();
+        fieldCopy(person, person2);
+//        getFields(person2);
+    }
+
+
+    /** 方法--属性复制 */
+    public void fieldCopy(Object source, Object target) throws Exception {
+        Method[] methods = source.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            String methodName = method.getName();
+            System.out.println(methodName);
+            if (methodName.startsWith("get")) {
+                Object value = method.invoke(source, new Object[0]);
+                System.out.println(value);
+                String setMethodName = methodName.replaceFirst("(get)", "set");
+                Method setMethod = Person.class.getMethod(setMethodName,
+                        method.getReturnType());
+                setMethod.invoke(target, value);
+            }
+        }
+    }
+
 
 
 }

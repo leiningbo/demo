@@ -266,13 +266,16 @@ public class DemoApplicationTests {
      * 自定义捆包号
      * @return KB
      */
-    public static String generateBundleNo(String lastBundle) {
+    public static String generateBundleNo(String lastBundle,Integer userId) {
         StringBuilder result = new StringBuilder();
         result.append("KB");
         String date = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now());
         result.append(date);
         String time = System.currentTimeMillis()+"";
-        result.append(time.substring(time.length() - 4));
+        String substring = time.substring(time.length() - 4);
+        int integerSubstring = Integer.parseInt(substring);
+        int intResult = integerSubstring + userId;
+        result.append(intResult);
         if (!StringUtils.isEmpty(lastBundle)) {
             Pattern pattern = Pattern.compile("" + "(\\d{12})(\\d{4})$");
             Matcher matcher = pattern.matcher(lastBundle);
@@ -315,7 +318,9 @@ public class DemoApplicationTests {
     @Test
     public void test3(){
         for (int i = 0; i < 1000; i++) {
-            String bundleNo = generateBundleNo("")+i;
+            int userid = 110;
+            String bundleNo = generateBundleNo("",userid+i);
+            System.out.println(userid);
             System.out.println(bundleNo);
         }
     }
