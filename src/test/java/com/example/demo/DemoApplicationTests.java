@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo.constants.DemoA.DemoAConst;
 import com.example.demo.entity.Stationery;
 import com.example.demo.entity.Student;
+import com.example.demo.thread.MyRunnable;
+import com.example.demo.thread.MyThreads;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -312,10 +314,29 @@ public class DemoApplicationTests {
 
     @Test
     public void test3(){
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             String bundleNo = generateBundleNo("")+i;
             System.out.println(bundleNo);
         }
+    }
+
+    @Test
+    public void test4() {
+        Runnable runnable = new MyRunnable();
+        for (int i = 0; i < 20; i++) {
+            new Thread(runnable).start();
+        }
+
+    }
+
+    @Test
+    public void test5() throws Exception {
+        Thread t1 = new MyThreads();
+        Thread t2 = new MyThreads();
+        t1.start();
+        t2.start();
+        Thread.sleep(1000);
+
     }
 
 
