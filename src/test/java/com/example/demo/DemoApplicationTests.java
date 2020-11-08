@@ -348,8 +348,9 @@ public class DemoApplicationTests {
     public void test6(){
         Integer a = 127;
         Integer b = 127;
-
+        int c1 = 127;
         System.out.println(a == b);
+        System.out.println(a == c1);
 
         Integer a1 = 128;
         Integer b1 = 128;
@@ -357,6 +358,14 @@ public class DemoApplicationTests {
         System.out.println(a1 == b1);
         System.out.println(a1 == c);
 
+    }
+
+    @Test
+    public void test7(){
+        String s1 = "abc";
+        String s2 = new String("abc");
+        System.out.println(s1 == s2);
+        System.out.println(s1.equals(s2));
 
 
     }
