@@ -13,7 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @program: demo
@@ -84,6 +85,24 @@ public class DemoTest {
         Person person2 = new Person();
         fieldCopy(person, person2);
 //        getFields(person2);
+    }
+
+    @Test
+    public void test11() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("a", "1");
+        map.put("b", "2");
+        for (Map.Entry<String, Object> map1 : map.entrySet()) {
+            System.out.println(map1);
+        }
+        List<String> list = new ArrayList<>();
+        list.add("abc");
+        // 只读集合
+        List<String> strings = Collections.unmodifiableList(list);
+        strings.add("cba");
+        System.out.println(strings.size());
+        // 同步写list？
+        List<String> copyList = new CopyOnWriteArrayList<>();
     }
 
 
