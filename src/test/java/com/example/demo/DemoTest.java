@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -121,6 +122,22 @@ public class DemoTest {
                 setMethod.invoke(target, value);
             }
         }
+    }
+
+    @Test
+    public void test12()   {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        //保留两位有效数字
+        numberFormat.setMaximumFractionDigits(2);
+
+        List<TradeGoods> tradeGoods = iTradeGoodsService.queryAll();
+        for (TradeGoods tradeGood : tradeGoods) {
+            numberFormat.format(tradeGood.getGoodsPrice());
+        }
+
+        tradeGoods.forEach(item -> System.out.println(item.getGoodsPrice()));
+        tradeGoods.forEach(item -> System.out.println(numberFormat.format(item.getGoodsPrice())));
+        tradeGoods.forEach(item -> System.out.println(item.getForGoodPrice()));
     }
 
 

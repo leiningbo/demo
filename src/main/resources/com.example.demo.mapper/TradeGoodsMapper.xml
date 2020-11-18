@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    goods_id, goods_name, goods_number, goods_price, goods_desc, add_time
+    goods_id, goods_name, goods_number,goods_price,format(goods_price,2) as forGoodPrice, goods_desc, add_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.TradeGoodsExample" >
     select
