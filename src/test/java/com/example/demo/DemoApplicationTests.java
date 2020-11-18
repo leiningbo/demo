@@ -268,7 +268,6 @@ public class DemoApplicationTests {
      */
     public static String generateBundleNo(String lastBundle,Integer userId) {
         StringBuilder result = new StringBuilder();
-        result.append("KB");
         String date = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now());
         result.append(date);
         String time = System.currentTimeMillis()+"";
@@ -297,6 +296,43 @@ public class DemoApplicationTests {
         return result.toString();
     }
 
+    /**
+     * 自定义捆包号
+     * @return KB
+     */
+    public static String generateBundleNo2(String lastBundle,Integer userId,int count) {
+        StringBuilder result = new StringBuilder();
+        String date = DateTimeFormatter.ofPattern("yyyyMMddHH").format(LocalDateTime.now());
+        result.append(date);
+        result.append(userId);
+        long number = 0;
+        while (userId > 0) {
+            userId = userId / 10;
+            number++;
+        }
+        while (9 - number > 0) {
+            number++;
+            result.append("0");
+        }
+        String bundleNo = result.toString();
+        Long aLong = Long.valueOf(bundleNo);
+        long aaa = aLong + count;
+        return aaa + "";
+    }
+
+    /**
+     * 自定义捆包号
+     * @return KB
+     */
+    public static String generateBundleNo3() {
+        StringBuilder result = new StringBuilder();
+        result.append("KBH");
+        String salt = randomNumberGenerator.nextBytes().toHex();
+        result.append(salt.substring(13));
+        return result.toString();
+    }
+
+
     @Test
     public void test2() {
         LocalDateTime now = LocalDateTime.now();
@@ -322,6 +358,7 @@ public class DemoApplicationTests {
             String bundleNo = generateBundleNo("",userid+i);
             System.out.println(userid);
             System.out.println(bundleNo);
+
         }
     }
 
@@ -341,8 +378,22 @@ public class DemoApplicationTests {
         t1.start();
         t2.start();
         Thread.sleep(1000);
+    }
+
+    @Test
+    public void test6() {
+        for (int i = 0; ; ++i) {
+            System.out.println(i);
+            System.out.println(++i);
+            System.out.println(i);
+            if (i >= 8-1) {
+                System.out.println(i);
+                break;
+            }
+        }
 
     }
+
 
 
 
