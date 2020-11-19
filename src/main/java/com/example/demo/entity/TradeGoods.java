@@ -22,6 +22,8 @@ public class TradeGoods {
 
     private Date addTime;
 
+    private String forGoodPrice;
+
     public Long getGoodsId() {
         return goodsId;
     }
