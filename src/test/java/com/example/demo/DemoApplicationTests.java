@@ -395,7 +395,7 @@ public class DemoApplicationTests {
     }
 
     @Test
-    public void test6(){
+    public void test8(){
         Integer a = 127;
         Integer b = 127;
         int c1 = 127;
