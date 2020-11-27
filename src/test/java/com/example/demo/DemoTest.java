@@ -138,6 +138,11 @@ public class DemoTest {
         tradeGoods.forEach(item -> System.out.println(item.getGoodsPrice()));
         tradeGoods.forEach(item -> System.out.println(numberFormat.format(item.getGoodsPrice())));
         tradeGoods.forEach(item -> System.out.println(item.getForGoodPrice()));
+
+        // 前端两种
+        // parseFloat(row.weight).toFixed(4).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+        // Number(row.unitPrice).toLocaleString('en-US')
+
     }
 
 
