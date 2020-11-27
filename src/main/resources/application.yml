@@ -40,6 +40,14 @@ spring:
         enabled: true
         url-pattern: /*
 
+  redis:
+    host: 139.196.32.68
+    port: 6379
+    password: redisabo
+    jedis:
+      pool:
+        max-active: 8
+
 
   mail:
     # QQ邮箱发送邮件服务器
