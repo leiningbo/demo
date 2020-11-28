@@ -108,6 +108,9 @@ public class RedisDemoController {
      */
     @RequestMapping(value = "/userLikeCountSum", method = RequestMethod.GET)
     public UserLikesCount userLikeCountSum(@ApiParam(name = "userId", value = "用户id") @RequestParam(value = "userId") Long userId) {
+        if (userId == null) {
+            throw new BusinessException(ResultCode.PARAM_IS_INVALID);
+        }
         return iUserLikeCountService.selectByUserId(userId);
     }
 
