@@ -17,6 +17,7 @@ public enum ResultCode {
     /* 参数错误：10001-19999 */
     PARAM_IS_INVALID(10001, "参数无效"),
     SEND_FAIL(10002, "发送失败"),
+    USER_HAS_LIKED(10003, "用户已点过赞"),
 
     /* 用户错误：20001-29999*/
     USER_HAS_EXISTED(20001, "用户名已存在"),
