@@ -149,7 +149,7 @@
     </if>
   </select>
 
-  <select id="getByUserId" resultType="com.example.demo.entity.UserLikesCount">
+  <select id="getByUserId" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     from user_likes_count
     where user_id = #{userLikesId}

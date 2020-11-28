@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.constants.ResultCode;
+import com.example.demo.entity.UserLikesCount;
 import com.example.demo.entity.UserLikesList;
 import com.example.demo.exceptions.BusinessException;
 import com.example.demo.response.Result;
+import com.example.demo.service.IUserLikeCountService;
 import com.example.demo.service.IUserLikesListService;
 import com.example.demo.utils.RedisBizUtil;
 import com.example.demo.utils.RedisUtils;
@@ -34,6 +36,8 @@ public class RedisDemoController {
     @Autowired
     private IUserLikesListService iUserLikesListService;
 
+    @Autowired
+    private IUserLikeCountService iUserLikeCountService;
 
 
 
@@ -78,11 +82,10 @@ public class RedisDemoController {
 
     /**
      * 点赞
-     * @param userLikesList
-     * @return
+     * @param userLikesList 实体
      */
     @RequestMapping(value = "/userLikes",method = RequestMethod.POST)
-    public Result userLikes(@ApiParam(name = "userLikesList",value = "用户") @RequestBody UserLikesList userLikesList ) {
+    public void userLikes(@ApiParam(name = "userLikesList",value = "用户") @RequestBody UserLikesList userLikesList ) {
         if (userLikesList == null || userLikesList.getUserId() == null || userLikesList.getUserLikesId() == null) {
             throw new BusinessException(ResultCode.PARAM_IS_INVALID);
         }
@@ -92,10 +95,20 @@ public class RedisDemoController {
             // 2、点赞
             String likeKey = RedisBizUtil.getLikeKey(userLikesList.getUserId());
             iUserLikesListService.userlike(userLikesList);
-            return Result.suc();
+
         }else {
             throw new BusinessException(ResultCode.USER_HAS_LIKED);
         }
+    }
+
+    /**
+     *
+     * @param userId 获赞者id
+     * @return 获赞者info
+     */
+    @RequestMapping(value = "/userLikeCountSum", method = RequestMethod.GET)
+    public UserLikesCount userLikeCountSum(@ApiParam(name = "userId", value = "用户id") @RequestParam(value = "userId") Long userId) {
+        return iUserLikeCountService.selectByUserId(userId);
     }
 
 }
