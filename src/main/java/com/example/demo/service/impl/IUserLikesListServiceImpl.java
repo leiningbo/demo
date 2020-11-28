@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * @program: demo
  * @description:
@@ -35,6 +37,7 @@ public class IUserLikesListServiceImpl implements IUserLikesListService {
     @Transactional(rollbackFor = Exception.class)
     public void userlike(UserLikesList userLikesList) {
         // 1、点赞
+        userLikesList.setCreateTime(new Date());
         userLikesListMapper.insert(userLikesList);
         // 2、获赞者 总赞数 +1
         UserLikesCount userLike = userLikesCountMapper.getByUserId(userLikesList.getUserLikesId());
@@ -43,6 +46,7 @@ public class IUserLikesListServiceImpl implements IUserLikesListService {
             UserLikesCount likesCount = new UserLikesCount();
             likesCount.setUserId(userLikesList.getUserLikesId());
             likesCount.setUserLikesCount(1L);
+            likesCount.setCreateTime(new Date());
             userLikesCountMapper.insert(likesCount);
         }else {
             // 更新总赞数 +1

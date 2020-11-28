@@ -152,6 +152,7 @@
   <select id="getByUserId" resultType="com.example.demo.entity.UserLikesCount">
     select <include refid="Base_Column_List" />
     from user_likes_count
+    where user_id = #{userLikesId}
   </select>
 
   <update id="updateByExampleSelective" parameterType="map" >

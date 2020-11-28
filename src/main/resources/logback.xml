@@ -53,6 +53,9 @@
 	<logger name="org.hibernate.SQL">
 		<level value="DEBUG" />
 	</logger>
+	<logger name="com.example.demo.mapper">
+		<level value="DEBUG" />
+	</logger>
 	
 	<root level="INFO">
 		<appender-ref ref="APP" />

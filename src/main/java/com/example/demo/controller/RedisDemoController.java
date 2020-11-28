@@ -84,18 +84,17 @@ public class RedisDemoController {
     @RequestMapping(value = "/userLikes",method = RequestMethod.POST)
     public Result userLikes(@ApiParam(name = "userLikesList",value = "用户") @RequestBody UserLikesList userLikesList ) {
         if (userLikesList == null || userLikesList.getUserId() == null || userLikesList.getUserLikesId() == null) {
-            return Result.fail(ResultCode.PARAM_IS_INVALID);
+            throw new BusinessException(ResultCode.PARAM_IS_INVALID);
         }
         // 1、检查用户是否给这个用户点过赞
         int i = iUserLikesListService.checkUserIsLike(userLikesList.getUserId(), userLikesList.getUserLikesId());
         if (i < 1) {
             // 2、点赞
             String likeKey = RedisBizUtil.getLikeKey(userLikesList.getUserId());
-            redisUtils.incrBy(likeKey, 1);
             iUserLikesListService.userlike(userLikesList);
             return Result.suc();
         }else {
-            return Result.fail(ResultCode.USER_HAS_LIKED);
+            throw new BusinessException(ResultCode.USER_HAS_LIKED);
         }
     }
 
