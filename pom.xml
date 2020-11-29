@@ -23,6 +23,7 @@
         <mybatis.version>1.3.1</mybatis.version>
         <springboot-data-redis.version>2.1.7.RELEASE</springboot-data-redis.version>
         <guava.version>22.0</guava.version>
+        <java-jwt.version>3.4.0</java-jwt.version>
     </properties>
 
     <dependencies>
@@ -125,6 +126,16 @@
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
+
+        <!--json web token 令牌-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
+
+
+
 
 
     </dependencies>
