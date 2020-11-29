@@ -1,13 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.constants.ResultCode;
-import com.example.demo.entity.UserLikesCount;
-import com.example.demo.entity.UserLikesList;
 import com.example.demo.exceptions.BusinessException;
 import com.example.demo.response.Result;
-import com.example.demo.service.IUserLikeCountService;
-import com.example.demo.service.IUserLikesListService;
-import com.example.demo.utils.RedisBizUtil;
 import com.example.demo.utils.RedisUtils;
 import com.example.demo.utils.StringToolUtils;
 import io.swagger.annotations.Api;
@@ -32,13 +27,6 @@ public class RedisDemoController {
 
     @Autowired
     private RedisUtils redisUtils;
-
-    @Autowired
-    private IUserLikesListService iUserLikesListService;
-
-    @Autowired
-    private IUserLikeCountService iUserLikeCountService;
-
 
 
     /**
@@ -80,38 +68,6 @@ public class RedisDemoController {
         }
     }
 
-    /**
-     * 点赞
-     * @param userLikesList 实体
-     */
-    @RequestMapping(value = "/userLikes",method = RequestMethod.POST)
-    public void userLikes(@ApiParam(name = "userLikesList",value = "用户") @RequestBody UserLikesList userLikesList ) {
-        if (userLikesList == null || userLikesList.getUserId() == null || userLikesList.getUserLikesId() == null) {
-            throw new BusinessException(ResultCode.PARAM_IS_INVALID);
-        }
-        // 1、检查用户是否给这个用户点过赞
-        int i = iUserLikesListService.checkUserIsLike(userLikesList.getUserId(), userLikesList.getUserLikesId());
-        if (i < 1) {
-            // 2、点赞
-            String likeKey = RedisBizUtil.getLikeKey(userLikesList.getUserId());
-            iUserLikesListService.userlike(userLikesList);
 
-        }else {
-            throw new BusinessException(ResultCode.USER_HAS_LIKED);
-        }
-    }
-
-    /**
-     *
-     * @param userId 获赞者id
-     * @return 获赞者info
-     */
-    @RequestMapping(value = "/userLikeCountSum", method = RequestMethod.GET)
-    public UserLikesCount userLikeCountSum(@ApiParam(name = "userId", value = "用户id") @RequestParam(value = "userId") Long userId) {
-        if (userId == null) {
-            throw new BusinessException(ResultCode.PARAM_IS_INVALID);
-        }
-        return iUserLikeCountService.selectByUserId(userId);
-    }
 
 }
