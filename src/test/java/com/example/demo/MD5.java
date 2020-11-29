@@ -31,10 +31,10 @@ public class MD5 {
         Md5Hash md5Hash = new Md5Hash(password);
         System.out.println(md5Hash);
         //md5+盐
-        Md5Hash pwd = new Md5Hash(password, "zhangsan");
+        Md5Hash pwd = new Md5Hash(password, salt);
         System.out.println(pwd);
         //md5+盐+散列次数
-        Md5Hash finallyPwd = new Md5Hash(password, "zhangsan",3);//cd757bae8bd31da92c6b14c235668091
+        Md5Hash finallyPwd = new Md5Hash(password, salt,3);//cd757bae8bd31da92c6b14c235668091
         System.out.println(finallyPwd);
 
     }
