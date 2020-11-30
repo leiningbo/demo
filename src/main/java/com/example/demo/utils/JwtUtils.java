@@ -5,6 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.demo.constants.ResultCode;
+import com.example.demo.exceptions.BusinessException;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -25,7 +27,7 @@ public class JwtUtils {
     /**
      * token私钥
      */
-    private static final String TOKEN_SECRET = "joijsdfjlsjfljfljl5135313135";
+    private static final String TOKEN_SECRET = "076e9ba9014e6f027269881ee06258c0";
 
     /**
      * 生成签名,15分钟后过期
@@ -48,18 +50,25 @@ public class JwtUtils {
     }
 
 
-    public static boolean verity(String token){
+    public static void verity(String token){
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
-            DecodedJWT jwt = verifier.verify(token);
-            return true;
+            verifier.verify(token);
         } catch (IllegalArgumentException e) {
-            return false;
+            throw new BusinessException(ResultCode.ILLEGAL_PARAMETER);
         } catch (JWTVerificationException e) {
-            return false;
+            throw new BusinessException(ResultCode.UNAUTHORIZED);
         }
+    }
 
+    /**
+     * 获取token内的用户信息
+     * @param token
+     * @return
+     */
+    public static DecodedJWT decodedJWT(String token) {
+        return JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).build().verify(token);
     }
 
 }
