@@ -43,6 +43,12 @@ public class TokenInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+        //支持跨域请求
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,X-Nideshop-Token,X-URL-PATH");
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         // 从请求头拿到token
         String token = request.getHeader("token");
         // 如果不是映射到方法直接通过

@@ -22,7 +22,8 @@ public class JwtUtils {
      * 过期时间为一天
      * TODO 正式上线更换为15分钟
      */
-    private static final long EXPIRE_TIME = 24*60*60*1000;
+//    private static final long EXPIRE_TIME = 24*60*60*1000;
+    private static final long EXPIRE_TIME = 60*1000;
 
     /**
      * token私钥

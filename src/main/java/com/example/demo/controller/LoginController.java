@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Retention.PassToken;
 import com.example.demo.entity.TradeUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,8 @@ public class LoginController {
      *
      * @param params 参数
      */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @PassToken
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestBody Map<String, String> params) {
         String loginName = params.get("loginName");
         String loginPwd = params.get("loginPwd");
