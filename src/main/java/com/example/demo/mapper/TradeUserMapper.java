@@ -30,4 +30,12 @@ public interface TradeUserMapper {
     int updateByPrimaryKeySelective(TradeUser record);
 
     int updateByPrimaryKey(TradeUser record);
+
+    /**
+     * 登录
+     * @param userName 用户名
+     * @param userPassword 密码
+     * @return
+     */
+    TradeUser login(@Param("userName") String userName,@Param("userPassword") String userPassword);
 }

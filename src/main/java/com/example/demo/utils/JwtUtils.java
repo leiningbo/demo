@@ -1,6 +1,7 @@
 package com.example.demo.utils;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -23,7 +24,7 @@ public class JwtUtils {
      * TODO 正式上线更换为15分钟
      */
 //    private static final long EXPIRE_TIME = 24*60*60*1000;
-    private static final long EXPIRE_TIME = 60*1000;
+    private static final long EXPIRE_TIME = 15*60*1000;
 
     /**
      * token私钥
@@ -32,22 +33,23 @@ public class JwtUtils {
 
     /**
      * 生成签名,15分钟后过期
-     * @param username
-     * @param userId
      * @return
      */
-    public static String sign(String username,String userId){
-        //过期时间
+    public static String getTokenSecret(HashMap<String,String> map){
+        // 过期时间
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-        //私钥及加密算法
+        // 私钥及加密算法
         Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
-        //设置头信息
+        // 设置头信息
         HashMap<String, Object> header = new HashMap<>(2);
         header.put("typ", "JWT");
         header.put("alg", "HS256");
+        // 创建JWT
+        JWTCreator.Builder builder = JWT.create();
+        // payload
+        map.forEach(builder::withClaim);
         //附带username和userID生成签名
-        return JWT.create().withHeader(header).withClaim("loginName",username)
-                .withClaim("userId",userId).withExpiresAt(date).sign(algorithm);
+        return builder.withHeader(header).withExpiresAt(date).sign(algorithm);
     }
 
 

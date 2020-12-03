@@ -26,7 +26,7 @@ public class MD5 {
         //盐
         String salt = generator.nextBytes().toHex();
         //明文
-        String password = "666";
+        String password = "a4574243";
         //md5加密
         Md5Hash md5Hash = new Md5Hash(password);
         System.out.println(md5Hash);

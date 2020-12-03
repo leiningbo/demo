@@ -1,10 +1,8 @@
 package com.example.demo.interceptor;
 
-import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.example.demo.Retention.PassToken;
 import com.example.demo.Retention.UserLoginToken;
 import com.example.demo.constants.ResultCode;
-import com.example.demo.entity.TradeUser;
 import com.example.demo.exceptions.BusinessException;
 import com.example.demo.service.IUserService;
 import com.example.demo.utils.JwtUtils;
@@ -75,7 +73,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                 // 验证token
                 JwtUtils.verity(token);
                 // 从token中拿userId
-                String userId;
+                /*String userId;
                 try {
                     userId = JwtUtils.decodedJWT(token).getClaim("userId").asString();
                 } catch (JWTDecodeException e) {
@@ -84,7 +82,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                 TradeUser user = userService.getById(Long.valueOf(userId));
                 if (user == null) {
                     throw new BusinessException(ResultCode.USER_NOT_FIND);
-                }
+                }*/
                 return true;
             }
         }

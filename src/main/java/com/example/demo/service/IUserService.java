@@ -6,4 +6,5 @@ public interface IUserService {
 
     TradeUser getById(Long id);
 
+    TradeUser login(TradeUser user);
 }
