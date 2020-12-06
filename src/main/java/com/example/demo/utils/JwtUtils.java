@@ -27,7 +27,7 @@ public class JwtUtils {
     private static final long EXPIRE_TIME = 15*60*1000;
 
     /**
-     * token私钥
+     * token 盐值
      */
     private static final String TOKEN_SECRET = "076e9ba9014e6f027269881ee06258c0";
 
@@ -41,15 +41,16 @@ public class JwtUtils {
         // 私钥及加密算法
         Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
         // 设置头信息
-        HashMap<String, Object> header = new HashMap<>(2);
-        header.put("typ", "JWT");
-        header.put("alg", "HS256");
+//        HashMap<String, Object> header = new HashMap<>(2);
+//        header.put("typ", "JWT");
+//        header.put("alg", "HS256");
         // 创建JWT
         JWTCreator.Builder builder = JWT.create();
         // payload
         map.forEach(builder::withClaim);
         //附带username和userID生成签名
-        return builder.withHeader(header).withExpiresAt(date).sign(algorithm);
+//        return builder.withHeader(header).withExpiresAt(date).sign(algorithm);
+        return builder.withExpiresAt(date).sign(algorithm);
     }
 
 
