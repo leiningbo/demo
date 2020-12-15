@@ -145,6 +145,40 @@ public class DemoTest {
 
     }
 
+    @Test
+    public void test13() {
+        // 近7天每天的回访数据，没有为0
+//        SELECT
+//        a.days,
+//                ifnull( b.visitCount, 0 ) AS visitCount
+//        FROM
+//                (
+//                        SELECT
+//                        curdate( ) AS days UNION
+//                        SELECT
+//                        date_sub( curdate( ), INTERVAL 1 DAY ) AS days UNION
+//                        SELECT
+//                        date_sub( curdate( ), INTERVAL 2 DAY ) AS days UNION
+//                        SELECT
+//                        date_sub( curdate( ), INTERVAL 3 DAY ) AS days UNION
+//                        SELECT
+//                        date_sub( curdate( ), INTERVAL 4 DAY ) AS days UNION
+//                        SELECT
+//                        date_sub( curdate( ), INTERVAL 5 DAY ) AS days UNION
+//                        SELECT
+//                        date_sub( curdate( ), INTERVAL 6 DAY ) AS days
+//                ) a
+//        LEFT JOIN ( SELECT date( create_time ) AS datetime, count( * ) AS visitCount FROM share_visitor where sys_user_id = #{userId} GROUP BY date( create_time ) ) b ON a.days = b.datetime
+
+        // 最近7天的 没数据查不出的
+//        SELECT
+//        DATE_FORMAT( create_time, '%Y-%m-%d' ) days,
+//                count( * ) shareCount
+//                FROM
+//        ( SELECT * FROM share_path_track WHERE DATE_SUB( CURDATE( ), INTERVAL 100 DAY ) <= date( create_time ) and sys_user_id =135 ) AS dayTable
+//        group by days
+    }
+
 
 
 }
