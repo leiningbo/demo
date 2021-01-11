@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo.entity.Person;
 import com.example.demo.entity.TradeGoods;
 import com.example.demo.service.ITradeGoodsService;
+import com.example.demo.utils.StringToolUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -177,6 +178,13 @@ public class DemoTest {
 //                FROM
 //        ( SELECT * FROM share_path_track WHERE DATE_SUB( CURDATE( ), INTERVAL 100 DAY ) <= date( create_time ) and sys_user_id =135 ) AS dayTable
 //        group by days
+    }
+
+    @Test
+    public void test14() {
+        boolean result = StringToolUtils.matcherNumberOrStringType("123-ewq");
+        System.out.println(result);
+
     }
 
 
