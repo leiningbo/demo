@@ -185,6 +185,17 @@ public class DemoTest {
         boolean result = StringToolUtils.matcherNumberOrStringType("123-ewq");
         System.out.println(result);
 
+        List<String> strings = new ArrayList<>();
+        strings.add("abc");
+        strings.add("def");
+        strings.add("ghi");
+        strings.add("jkl");
+        strings.add("mno");
+        System.out.println(strings);
+        String s = StringToolUtils.stringArrayConcatenationComma(strings);
+        System.out.println(s);
+        List<String> payOrderImgUrls = new ArrayList<>(Arrays.asList(s.split(",")));
+        System.out.println(payOrderImgUrls);
     }
 
 
