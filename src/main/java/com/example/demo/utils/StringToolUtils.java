@@ -1,6 +1,7 @@
 package com.example.demo.utils;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,6 +43,23 @@ public class StringToolUtils implements Serializable {
     public static boolean matcherNumberOrStringType(String s) {
         Matcher matcher = numberOfStringPattern.matcher(s);
         return  matcher.matches();
+    }
+
+    /**
+     * 字符串数组拼接逗号,去除最后一个逗号
+     * @return www.baidu.com,www.google.com
+     */
+    public static String stringArrayConcatenationComma(List<String> strings) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String resultString = "";
+        if (strings.size() > 0) {
+            for (String s : strings) {
+                stringBuilder.append(s).append(",");
+            }
+            String result = stringBuilder.toString();
+            resultString = result.substring(0, result.length() - 1);
+        }
+        return resultString;
     }
 
     public static void main(String[] args) {
