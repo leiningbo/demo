@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Retention.PassToken;
 import com.example.demo.entity.TradeGoods;
 import com.example.demo.service.ITradeGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class TradeGoodsController {
     @Autowired
     private ITradeGoodsService tradeGoodsService;
 
+    @PassToken
     @RequestMapping(value = "/queryAll")
     public List<TradeGoods> queryAll() {
         return tradeGoodsService.queryAll();

@@ -33,13 +33,13 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
      * 处理response的具体业务方法
      */
     @Override
-    public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if (o instanceof ErrorResult) {
-            ErrorResult errorResult = (ErrorResult) o;
+    public Object beforeBodyWrite(Object obj, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        if (obj instanceof ErrorResult) {
+            ErrorResult errorResult = (ErrorResult) obj;
             return Result.fail(errorResult.getStatus(),errorResult.getMessage());
-        } else if (o instanceof String) {
-            return JsonUtil.object2Json(Result.suc(0));
+        } else if (obj instanceof String) {
+            return JsonUtil.object2Json(Result.suc(obj));
         }
-        return Result.suc(o);
+        return Result.suc(obj);
     }
 }
