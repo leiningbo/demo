@@ -22,6 +22,7 @@
         <easyexcel.version>2.1.6</easyexcel.version>
         <mybatis.version>1.3.1</mybatis.version>
         <springboot-data-redis.version>2.1.7.RELEASE</springboot-data-redis.version>
+        <springboot-redisson.version>3.13.6</springboot-redisson.version>
         <guava.version>22.0</guava.version>
         <java-jwt.version>3.4.0</java-jwt.version>
     </properties>
@@ -106,10 +107,18 @@
             <version>2.0.2</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
+<!--            <version>${springboot-data-redis.version}</version>-->
+<!--        </dependency>-->
+
+        <!--redis分布式策略 redisson
+        redisson-spring-boot-starter集成了spring data redis和redisson；整合redisson配置支持spring data redis配置-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>${springboot-data-redis.version}</version>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>${springboot-redisson.version}</version>
         </dependency>
 
         <dependency>
@@ -133,6 +142,7 @@
             <artifactId>java-jwt</artifactId>
             <version>${java-jwt.version}</version>
         </dependency>
+
 
 
 
