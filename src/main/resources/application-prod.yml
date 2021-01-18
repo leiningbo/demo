@@ -40,11 +40,8 @@ spring:
         enabled: true
         url-pattern: /*
 
-  profiles:
-    active: prod
-
   redis:
-    host: 139.196.32.68
+    host: 127.0.0.1
     port: 6379
     password: redisabo
     jedis:

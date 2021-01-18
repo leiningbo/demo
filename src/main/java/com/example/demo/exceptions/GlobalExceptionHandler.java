@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
         message.setText("URL:"+request.getRequestURI());
         // 发送时间
         message.setSentDate(new Date());
-        javaMailSender.send(message);
+//        javaMailSender.send(message);
         return error;
     }
 

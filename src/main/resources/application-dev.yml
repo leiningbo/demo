@@ -40,9 +40,6 @@ spring:
         enabled: true
         url-pattern: /*
 
-  profiles:
-    active: prod
-
   redis:
     host: 139.196.32.68
     port: 6379
