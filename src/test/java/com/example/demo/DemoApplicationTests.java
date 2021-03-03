@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.example.demo.constants.DemoA.DemoAConst;
 import com.example.demo.entity.Stationery;
@@ -8,6 +7,7 @@ import com.example.demo.entity.Student;
 import com.example.demo.thread.MyRunnable;
 import com.example.demo.thread.MyThreads;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -237,11 +237,11 @@ public class DemoApplicationTests {
         }
 
         String abc = "abc";
-        if (StringUtils.isEmpty(abc)) {
-            System.out.println("无");
-        } else {
-            System.out.println("abc");
-        }
+//        if (StringUtils.isEmpty(abc)) {
+//            System.out.println("无");
+//        } else {
+//            System.out.println("abc");
+//        }
     }
 
     @Test
@@ -275,24 +275,24 @@ public class DemoApplicationTests {
         int integerSubstring = Integer.parseInt(substring);
         int intResult = integerSubstring + userId;
         result.append(intResult);
-        if (!StringUtils.isEmpty(lastBundle)) {
-            Pattern pattern = Pattern.compile("" + "(\\d{12})(\\d{4})$");
-            Matcher matcher = pattern.matcher(lastBundle);
-            String lastFlowNoNum = "";
-            String lastFlowNoDate = "";
-            if (matcher.find()) {
-                lastFlowNoDate = matcher.group(1);
-                lastFlowNoNum = matcher.group(2);
-            }
-            if (lastFlowNoDate.equals(date)) {
-                Integer curFlowNoNumDig = Integer.parseInt(lastFlowNoNum) + 1;
-                result.append(String.format("%0" + 4 + "d", curFlowNoNumDig));
-            } else {
-                result.append(String.format("%0" + 4 + "d", 1));
-            }
-        } else {
-            result.toString();
-        }
+//        if (!StringUtils.isEmpty(lastBundle)) {
+//            Pattern pattern = Pattern.compile("" + "(\\d{12})(\\d{4})$");
+//            Matcher matcher = pattern.matcher(lastBundle);
+//            String lastFlowNoNum = "";
+//            String lastFlowNoDate = "";
+//            if (matcher.find()) {
+//                lastFlowNoDate = matcher.group(1);
+//                lastFlowNoNum = matcher.group(2);
+//            }
+//            if (lastFlowNoDate.equals(date)) {
+//                Integer curFlowNoNumDig = Integer.parseInt(lastFlowNoNum) + 1;
+//                result.append(String.format("%0" + 4 + "d", curFlowNoNumDig));
+//            } else {
+//                result.append(String.format("%0" + 4 + "d", 1));
+//            }
+//        } else {
+//            result.toString();
+//        }
         return result.toString();
     }
 

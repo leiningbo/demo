@@ -1,6 +1,6 @@
 package com.example.demo.thread;
 
-import com.alibaba.druid.util.StringUtils;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -68,24 +68,24 @@ public class MyRunnable implements Runnable {
         result.append(date);
         String time = System.currentTimeMillis()+"";
         result.append(time.substring(time.length() - 4));
-        if (!StringUtils.isEmpty(lastBundle)) {
-            Pattern pattern = Pattern.compile("" + "(\\d{12})(\\d{4})$");
-            Matcher matcher = pattern.matcher(lastBundle);
-            String lastFlowNoNum = "";
-            String lastFlowNoDate = "";
-            if (matcher.find()) {
-                lastFlowNoDate = matcher.group(1);
-                lastFlowNoNum = matcher.group(2);
-            }
-            if (lastFlowNoDate.equals(date)) {
-                Integer curFlowNoNumDig = Integer.parseInt(lastFlowNoNum) + 1;
-                result.append(String.format("%0" + 4 + "d", curFlowNoNumDig));
-            } else {
-                result.append(String.format("%0" + 4 + "d", 1));
-            }
-        } else {
-            result.toString();
-        }
+//        if (!StringUtils.isEmpty(lastBundle)) {
+//            Pattern pattern = Pattern.compile("" + "(\\d{12})(\\d{4})$");
+//            Matcher matcher = pattern.matcher(lastBundle);
+//            String lastFlowNoNum = "";
+//            String lastFlowNoDate = "";
+//            if (matcher.find()) {
+//                lastFlowNoDate = matcher.group(1);
+//                lastFlowNoNum = matcher.group(2);
+//            }
+//            if (lastFlowNoDate.equals(date)) {
+//                Integer curFlowNoNumDig = Integer.parseInt(lastFlowNoNum) + 1;
+//                result.append(String.format("%0" + 4 + "d", curFlowNoNumDig));
+//            } else {
+//                result.append(String.format("%0" + 4 + "d", 1));
+//            }
+//        } else {
+//            result.toString();
+//        }
         return result.toString();
     }
 }
