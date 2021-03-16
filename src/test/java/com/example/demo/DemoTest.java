@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo.entity.Person;
 import com.example.demo.entity.TradeGoods;
 import com.example.demo.service.ITradeGoodsService;
+import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.StringToolUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -24,7 +27,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author: leiningbo
  * @create: 2020-09-26 11:24
  **/
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
 public class DemoTest {
@@ -45,6 +48,17 @@ public class DemoTest {
         String s2 = "zs";
         final String s3 = s1 + s2;
         System.out.println(s5 == s3);
+
+    }
+
+    @Test
+    public void testDate() throws ParseException {
+        Date startTime = DateUtils.dayCalculationStartTime(1);
+        int dayByMonth = DateUtils.dayByMonth(new Date());
+        Date endTime = DateUtils.dayCalculationEndTime(dayByMonth);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("start:" + sdf.format(startTime));
+        System.out.println("endTime:" + sdf.format(endTime));
 
     }
 
