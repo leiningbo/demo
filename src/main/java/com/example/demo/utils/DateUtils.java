@@ -44,22 +44,18 @@ public class DateUtils {
      * 输入天数 例如：1，得出：当前年月 1日 时间
      * 2021/3/1 00:00:00
      * @param day
+     * @param selectDate 2021-3
      * @return
      * @throws ParseException
      */
-    public static Date dayCalculationStartTime(int day) throws ParseException {
-        Calendar calendar = Calendar.getInstance();
-        StringBuilder date = new StringBuilder();
-        String year = calendar.get(Calendar.YEAR) + "-";
-        date.append(year);
-        String month = (calendar.get(Calendar.MONTH) + 1) + "-";
-        date.append(month);
+    public static Date dayCalculationStartTime(int day,String selectDate) throws ParseException {
         String _day = day + "";
-        date.append(_day);
         String start = " 00:00:00";
-        date.append(start);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.parse(date.toString());
+        String date = selectDate + "-" +
+                _day +
+                start;
+        return sdf.parse(date);
     }
 
     /**
@@ -69,19 +65,26 @@ public class DateUtils {
      * @return
      * @throws ParseException
      */
-    public static Date dayCalculationEndTime(int day) throws ParseException {
-        Calendar calendar = Calendar.getInstance();
-        StringBuilder date = new StringBuilder();
-        String year = calendar.get(Calendar.YEAR) + "-";
-        date.append(year);
-        String month = (calendar.get(Calendar.MONTH) + 1) + "-";
-        date.append(month);
+    public static Date dayCalculationEndTime(int day,String selectDate) throws ParseException {
         String _day = day + "";
-        date.append(_day);
-        String end = " 23:59:59";
-        date.append(end);
+        String start = " 23:59:59";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.parse(date.toString());
+        String date = selectDate + "-" +
+                _day +
+                start;
+        return sdf.parse(date);
+//        Calendar calendar = Calendar.getInstance();
+//        StringBuilder date = new StringBuilder();
+//        String year = calendar.get(Calendar.YEAR) + "-";
+//        date.append(year);
+//        String month = (calendar.get(Calendar.MONTH) + 1) + "-";
+//        date.append(month);
+//        String _day = day + "";
+//        date.append(_day);
+//        String end = " 23:59:59";
+//        date.append(end);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        return sdf.parse(date.toString());
     }
 
 }

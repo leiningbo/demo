@@ -53,9 +53,13 @@ public class DemoTest {
 
     @Test
     public void testDate() throws ParseException {
-        Date startTime = DateUtils.dayCalculationStartTime(1);
-        int dayByMonth = DateUtils.dayByMonth(new Date());
-        Date endTime = DateUtils.dayCalculationEndTime(dayByMonth);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM");
+        String selectDate = "2021-2";
+        int dayByMonth = DateUtils.dayByMonth(sdf1.parse(selectDate));
+
+        Date startTime = DateUtils.dayCalculationStartTime(1,selectDate);
+        Date endTime = DateUtils.dayCalculationEndTime(dayByMonth,selectDate);
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("start:" + sdf.format(startTime));
         System.out.println("endTime:" + sdf.format(endTime));
