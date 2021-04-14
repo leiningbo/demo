@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -420,6 +421,44 @@ public class DemoApplicationTests {
 
     }
 
+    /**
+     * 初始化订单编号
+     * 例如：TX202104140001
+     */
+    public static String initWithdrawOrderSn() {
+        StringBuilder orderSn = new StringBuilder();
+        orderSn.append("TX");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String date = sdf.format(new Date());
+        orderSn.append(date);
+        orderSn.append("0001");
+        return orderSn.toString();
+    }
+
+    /**
+     * 传入提现单最新的一条编号 同日期增加尾数字，不同则初始化
+     */
+    public static String nextWithdrawOrderSn(String orderSn) {
+        StringBuilder result = new StringBuilder();
+        String date = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now());
+        String txDate = "TX" + date;
+        result.append(txDate);
+        Pattern pattern = Pattern.compile("" + "(\\d{10})(\\d{4})$");
+        Matcher matcher = pattern.matcher(orderSn);
+        String lastFlowNum = "";
+        String lastFlowDate = "";
+        if (matcher.find()) {
+            lastFlowDate = matcher.group(1);
+            lastFlowNum = matcher.group(2);
+        }
+        if (lastFlowDate.equals(txDate)) {
+            Integer curFlowNoNumDig = Integer.parseInt(lastFlowNum) + 1;
+            result.append(String.format("%0" + 4 + "d", curFlowNoNumDig));
+        }else {
+            result.append(String.format("%0" + 4 + "d", 1));
+        }
+        return result.toString();
+    }
 
 
 
