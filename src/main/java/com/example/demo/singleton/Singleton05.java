@@ -1,7 +1,7 @@
 package com.example.demo.singleton;
 
 /**
- * 饿汉式 双检锁
+ * 懒汉式 双检锁
  */
 public class Singleton05 {
     private static volatile Singleton05 single = null;
