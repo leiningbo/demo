@@ -20,7 +20,7 @@
         <java.version>1.8</java.version>
         <swagger.version>2.5.0</swagger.version>
         <mysql.version>5.1.29</mysql.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.10.0</shiro.version>
         <easyexcel.version>2.1.6</easyexcel.version>
         <mybatis.version>1.3.1</mybatis.version>
         <springboot-data-redis.version>2.1.7.RELEASE</springboot-data-redis.version>
